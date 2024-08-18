@@ -2,12 +2,17 @@ import React, { useRef, useState } from 'react';
 import Header from './Header';
 import Netflix_Background from "../assets/Netflix-Background.jpg";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from "../utils/firebase";   // this auth will come from firebase.
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {auth} from "../utils/firebase";   
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const name = useRef(null);
     const email = useRef(null);
@@ -17,10 +22,6 @@ const Login = () => {
         const nameValue = name.current ? name.current.value : "";  // Safeguard against null
         const emailValue = email.current ? email.current.value : "";
         const passwordValue = password.current ? password.current.value : "";
-        console.log(nameValue);
-        console.log(emailValue);
-        console.log(passwordValue);
-
         // Validate the form data
         const message = checkValidData(isSignInForm ? "" : nameValue, emailValue, passwordValue, isSignInForm);
         setErrorMessage(message);
@@ -29,10 +30,26 @@ const Login = () => {
         //Sign In /Sign Up Logic
         if(!isSignInForm){
             // Sign Up Logic here
-            createUserWithEmailAndPassword(auth, nameValue, emailValue, passwordValue)
+            createUserWithEmailAndPassword(auth, emailValue, passwordValue)   // here i remove the "nameValue".
                 .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
+
+                // update profile func from firebase.
+                updateProfile(user, {
+                    displayName: nameValue, photoURL: "https://avatars.githubusercontent.com/u/161888039?v=4"
+                  })
+                    .then(() => {
+
+                        const {uid, email, displayName, photoURL} = auth.currentUser;
+                        dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
+                        // Goto Browse page
+                        navigate("/browse");
+                  })
+                    .catch((error) => {
+                    // An error occurred
+                    setErrorMessage(error.message)
+                  });
+                
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -46,6 +63,7 @@ const Login = () => {
                 .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
+                navigate("/browse");
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -55,12 +73,6 @@ const Login = () => {
 
         }
 
-
-
-        // if (!message) {
-        //     // Proceed with sign-in or sign-up logic
-        //     console.log("Form is Valid");
-        // }
     };
 
     const toggleSignInForm = () => {
