@@ -1,4 +1,4 @@
-# Netflix GPT
+# FlickFinder GPT
 
 - Create React App
 - Configured TailwindCSS
