@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Netflix_Logo from "../assets/Netflix_Logo.png"; 
-import image from "../assets/image.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from '../utils/firebase';
+import { auth } from '../utils/firebase';   
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
+
 
 const Header = () => {
 
@@ -26,7 +26,7 @@ const Header = () => {
         if (user) {
             // User is signed in              
           const {uid, email, displayName, photoURL} = user;
-          dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
+          dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
 
           navigate("/browse");  
         } else {

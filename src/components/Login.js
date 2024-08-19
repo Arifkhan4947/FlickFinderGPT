@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Header from './Header';
 import Netflix_Background from "../assets/Netflix-Background.jpg";
+import image from "../assets/image.png";
 import { checkValidData } from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "../utils/firebase";
@@ -34,7 +35,7 @@ const Login = () => {
 
                 // update profile func from firebase.
                 updateProfile(user, {
-                    displayName: nameValue, photoURL: "https://avatars.githubusercontent.com/u/161888039?v=4"
+                    displayName: nameValue, photoURL: image 
                   })
                     .then(() => {
 
