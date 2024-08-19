@@ -1,23 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Netflix_Logo from "../assets/Netflix_Logo.png"; 
 import image from "../assets/image.png";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
 
 const Header = () => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(store => store.user)
 
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-      navigate("/");
-    }).catch((error) => {
+    signOut(auth).then(() => {})
+    .catch((error) => {
       navigate("/error")   // HW for build "error" page component.
     });
   }
+
+  // useEffect use for once time action should be happen.
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in              
+          const {uid, email, displayName, photoURL} = user;
+          dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
+
+          navigate("/browse");  
+        } else {
+          // User is signed out
+          dispatch(removeUser());
+          navigate("/");
+        }
+      });
+},[]);
 
   return (
     <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
