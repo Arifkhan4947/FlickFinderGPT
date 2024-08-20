@@ -22,6 +22,7 @@
 - Add user "image" profile in Login.js file 
 
 - Register TMDB API & create an app & get access token
+- Get Data from TMDB now playing movies List
 
 # Features 
 - Login/Sign Up 
