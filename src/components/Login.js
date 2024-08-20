@@ -18,7 +18,7 @@ const Login = () => {
     const password = useRef(null);
 
     const handleButtonClick = () => {
-        const nameValue = name.current ? name.current.value : "";  // Safeguard against null
+        const nameValue = name.current ? name.current.value : "";  
         const emailValue = email.current ? email.current.value : "";
         const passwordValue = password.current ? password.current.value : "";
         // Validate the form data
@@ -29,7 +29,7 @@ const Login = () => {
         //Sign In /Sign Up Logic
         if(!isSignInForm){
             // Sign Up Logic here
-            createUserWithEmailAndPassword(auth, emailValue, passwordValue)   // here i remove the "nameValue".
+            createUserWithEmailAndPassword(auth, emailValue, passwordValue)   
                 .then((userCredential) => {
                 const user = userCredential.user;
 
@@ -44,7 +44,7 @@ const Login = () => {
 
                   })
                     .catch((error) => {
-                    // An error occurred
+                    
                     setErrorMessage(error.message)
                   });
                 
