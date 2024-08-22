@@ -38,6 +38,9 @@
 - Made the Browse page amazing with Tailwind CSS
 - usePopularMovies Custom Hook
 
+- GPT Search Feature 
+
+
 
 # Features 
 - Login/Sign Up 
