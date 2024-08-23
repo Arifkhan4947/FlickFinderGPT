@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# This is use for making unvisible to ".env" file. This ".env" file is not visible to others on my Github.
+.env
