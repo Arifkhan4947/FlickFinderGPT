@@ -22,7 +22,6 @@ export const SUPPORTED_LANGUAGES = [
 
 // we provide it security using ".env" file for prevent from the Hackers. This is not show on my gihub code. because .gitignore file is not visible there. 
 // here the openai secret_key which we got from the "openai.com" website. It's Not Open Source we have to pay for this.
-export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
 
 
 
