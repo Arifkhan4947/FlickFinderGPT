@@ -10,6 +10,7 @@ const appStore = configureStore ({
         user: userReducer,          // This Slice came from the "userSlice.js"
         movies: moviesReducer,      // This Slice came from the "moviesSlice.js"
         gpt: gptReducer,            // This Slice came from the "gptSlice.js" // here "gpt" is the name which we are given inside the Slice. 
+
         config: configReducer,
     },
     
