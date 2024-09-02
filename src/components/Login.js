@@ -79,11 +79,14 @@ const Login = () => {
         <div>
             <Header />
             <div className='absolute'>
-                <img src={Netflix_Background} alt='BackgroundImage' />
+                <img 
+                    className="h-screen object-cover"
+                    src={Netflix_Background} alt='BackgroundImage' 
+                />
             </div>
             <form 
                 onSubmit={(e) => e.preventDefault()} // Prevent page reload
-                className='w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80'>
+                className='mx-auto py-[8%] md:py-[5%] my-[20%] h-[80%] w-[90%] md:w-3/12 absolute p-12 bg-black md:my-36 md:mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80'>
                 <h1 className='font-bold text-3xl py-4'>
                     {isSignInForm ? "Sign In" : "Sign Up"}
                 </h1>
@@ -113,10 +116,10 @@ const Login = () => {
 
                 <p className='text-red-500 font-bold text-lg py-2'>{errorMessage}</p>  {/* Display error message */}
 
-                <button className='p-4 my-6 bg-red-700 w-full rounded-lg' onClick={handleButtonClick}>
+                <button className='p-4 md:my-5 bg-red-700 w-full rounded-lg' onClick={handleButtonClick}>
                     {isSignInForm ? "Sign In" : "Sign Up"}
                 </button>
-                <p className='py-4 cursor-pointer' onClick={toggleSignInForm}>
+                <p className='py-8 md:py-4 cursor-pointer text-[14px] md:text-[18px] flex justify-center' onClick={toggleSignInForm}>
                     {isSignInForm ? "New to Netflix? Sign Up Now"
                         : "Already Registered? Sign In Now."}
                 </p>

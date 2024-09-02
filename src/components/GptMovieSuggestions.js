@@ -2,7 +2,7 @@ import React from 'react'
 
 const GptMovieSuggestions = () => {
   return (
-    <div>GptMovieSuggestions</div>
+    <div>{/* Gpt Movie Suggestion not working our limit plan is finished we have to pay for this */}</div>
   )
 }
 
